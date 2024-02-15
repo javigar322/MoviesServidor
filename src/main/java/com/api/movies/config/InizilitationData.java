@@ -5,8 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.api.movies.entities.Movie;
 import com.api.movies.entities.Role;
 import com.api.movies.entities.User;
+import com.api.movies.repositories.MovieRepository;
 import com.api.movies.repositories.UserRepository;
 
 @Component
@@ -18,7 +20,9 @@ public class InizilitationData implements CommandLineRunner {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-	
+    @Autowired
+    private MovieRepository movieRepository;
+    
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -40,6 +44,18 @@ public class InizilitationData implements CommandLineRunner {
 			user2.setPassword(passwordEncoder.encode("password"));
 			user2.getRoles().add(Role.ROLE_ADMIN);
 			userRepository.save(user2);
+			
+			// Crear películas
+            Movie movie1 = new Movie();
+            movie1.setName("Pelicula1");
+            movie1.setGenre("Accion");
+            movieRepository.save(movie1);
+
+            Movie movie2 = new Movie();
+            movie2.setName("Pelicula2");
+            movie2.setGenre("Comedia");
+            movieRepository.save(movie2);
+            
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

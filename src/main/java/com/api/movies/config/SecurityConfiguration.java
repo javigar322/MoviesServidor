@@ -37,7 +37,9 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(request -> request
 
-				.requestMatchers("/api/v1/auth/**").permitAll().requestMatchers(HttpMethod.GET, "/api/v1/user/**")
+				.requestMatchers("/api/v1/auth/**").permitAll()
+				.requestMatchers("/api/v1/movie/**").permitAll()
+				.requestMatchers(HttpMethod.GET, "/api/v1/user/**")
 				.hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
 				.requestMatchers(HttpMethod.POST, "/api/v1/user/*/addMovie/**")
 				.hasAuthority(Role.ROLE_USER.toString()) // Permite a ROLE_USER realizar reservas
