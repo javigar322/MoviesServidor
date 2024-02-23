@@ -55,6 +55,4 @@ class AuthenticationControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(mockResponse, response.getBody());
     }
-
-    // Add more tests for other methods in AuthenticationController if needed...
 }
